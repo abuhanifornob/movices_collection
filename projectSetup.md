@@ -112,3 +112,52 @@ update Json Script for command line
     "test": "echo \"Error: no test specified\" && exit 1"
   },
 ```
+
+# Eslint Setup
+
+### install
+
+```cmd
+npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint typescript
+```
+
+create **_eslint.config.mjs_** in rood directory
+
+```code
+import eslint from "@eslint/js";
+
+import globals from "globals";
+
+import tseslint from "typescript-eslint";
+
+export default tseslint.config(
+  eslint.configs.recommended,
+  ...tseslint.configs.recommended,
+  {
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+    },
+  },
+  {
+    rules: {
+      "no-unused-vars": "error",
+      "no-unused-expressions": "error",
+      "prefer-const": "error",
+      "no-console": "warn",
+      "no-undef": "error",
+    },
+  },
+  {
+    ignores: ["**/node_modules/", "**/dist"],
+  }
+);
+```
+
+update json Script
+
+```code
+ "lint": "npx eslint .",
+    "lint:fix": "npx eslint . --fix",
+```
