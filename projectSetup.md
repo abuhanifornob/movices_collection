@@ -44,9 +44,9 @@ npm install --save @types/cors
 npm install dotenv --save
 ```
 
-### Create a **src** file in the root
+### Create a **src** file in to root file
 
-then create file int src
+then create a file int to src file.
 **app.ts**
 sample code
 
@@ -63,4 +63,52 @@ app.listen(port, () => {
   console.log(` App is listening on port ${port}`);
 });
 
+```
+
+## then create a tsconfig.json file
+
+```cmd
+tsc --init
+```
+
+modified tsconfig file...
+
+```code
+ "outDir": "./dist"
+ "rootDir": "./src"
+```
+
+then bild the ts file to js file
+
+```cmd
+tsc
+```
+
+then we run the project
+
+```cmd
+node ./dist/app.js
+```
+
+install ts-node-dev
+
+```cmd
+npm i ts-node-dev
+```
+
+So you just combine node-dev and ts-node options (see docs of those packages):
+
+```cmd
+ts-node-dev --respawn --transpile-only .src/app.ts
+```
+
+update Json Script for command line
+
+```code
+ "scripts": {
+    "start:prod": "node ./dist/app.js",
+    "start:dev": "ts-node-dev --respawn --transpile-only ./src/app.ts",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
 ```
